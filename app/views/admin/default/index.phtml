@@ -1,0 +1,55 @@
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>最新公告</title>
+    <link rel="stylesheet" href="/admin/css/style.css" type="text/css" media="all">
+
+</head>
+<body>
+<div class="container">
+    <h3 class="marginbot">最新公告 <a href="newsadd" class="sgbtn">添加新文章</a></h3>
+    <div class="mainbox">
+        <form action="index" method="get">
+            <label for="orderId">新闻标题：</label>
+            <input style="width:200px;" name="newstitle" id="orderId" type="text">
+            <input name="submit" type="submit" class="btn btn-default btn-middle verti-middle-btn" value="搜索">
+        </form>
+        <form action="delete" method="post">
+            <table class="datalist fixwidth">
+                <tbody>
+
+                <tr>
+                    <th nowrap="nowrap"><input name="chkall" id="chkall" class="checkbox" type="checkbox"><label for="chkall">删除</label></th>
+                    <th nowrap="nowrap">文章名称</th>
+                    <th nowrap="nowrap">添加时间</th>
+                    <th nowrap="nowrap">详情</th>
+                </tr>
+                <!-----------------------循环读取最新公告信息------------------------>
+                <?php if (is_array($news)): ?>
+                    <?php foreach ($news as $list): ?>
+                        <tr>
+                            <td width="150"><input name="deleteid" value="<?=$list['id'];?>" class="checkbox" type="checkbox"></td>
+                            <td><strong><?php echo mb_substr($list['title'], 0, 20); ?></strong></td>
+                            <td width="200"><?php echo date('Y-m-d H:i:s', $list['time']); ?></td>
+                            <td width="150"><a href="/admin/default/newsedit?id=<?=$list['id'];?>">编辑</a></td>
+                        </tr>
+                    <?php endforeach;?>
+                <?php endif;?>
+                <!-----------------------读取最新公告信息------------------------>
+
+                <tr class="nobg">
+                    <td><input value="提 交" class="btn" type="submit" name="submit"></td>
+                    <td class="tdpage" colspan="4">
+                        <div class="pages"><?php echo $page; ?>
+
+                          </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="margintop"></div>
+
+    </div>
+</div>
+</body>
+</html>

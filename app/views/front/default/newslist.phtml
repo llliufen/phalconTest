@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>新闻详情</title>
+    </head>
+<body>
+
+<div class="lefter">
+    <div class="title">
+        <h2 class="cBlue fB">详细信息<b class="cGrey fn">News</b></h2>
+
+    </div>
+    <div class="article">
+        <?php if (is_array($news)): ?>
+        <?php foreach ($news as $row): ?>
+        <h3><?php echo $row['title']; ?></h3>
+        <h4>发布时间：<?php echo date("Y-m-d H:i:s", $row['time']); ?></h4>
+<?php echo $row['content']; ?>
+
+    </div>
+</div>
+</br>
+</br>
+</br>
+评论：
+</br>
+</br>
+    评论标题：
+<form  action="newslist" method="post">
+    <input name="title"  class="txt" type="text">
+    </br>
+</br>
+    评论内容：
+</br>
+   <textarea name="content" style="width:400px; height:150px"  ></textarea>
+<input name="submit" value="评论" type="submit">
+    <?php endforeach;?>
+    <?php endif;?>
+    </form>
+    </body>
+    </html>

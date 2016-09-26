@@ -1,0 +1,27 @@
+
+<html>
+<head>
+    <title>最新新闻</title>
+</head>
+<body><div class="content">
+    <div class="lefter">
+        <div class="title">
+            <h2 class="cBlue fB">最新新闻<b class="cGrey fn">Information</b></h2>
+        </div>
+        <ul class="list_r" style="padding-right:40px">
+            <link type="text/css" rel="stylesheet" href="/front/css/style.css" />
+
+            <?php if (is_array($news)): ?>
+                <?php foreach ($news as $list): ?>
+                    <li><a href="newslist?id=<?php echo $list['id']; ?>"><?php echo mb_substr($list['title'], 0, 20); ?> </a><span class="time2"><?php echo date('Y-m-d H:i:s', $list['time']); ?></span></li>
+                <?php endforeach;?>
+            <?php endif;?>
+
+        </ul>
+        <div class="blank10"></div>
+        <div class="pages"> <?php echo $page; ?></div>
+
+        </div>
+</body>
+</html>
+
