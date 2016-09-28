@@ -14,7 +14,7 @@
                 <tbody>
                 <?php if (is_array($news)): ?>
                 <?php foreach ($news as $list): ?>
-                        <tr><td><input name="id" value="<?php echo $list['id']; ?>" ></td></tr>
+                        <tr><td><input name="id" value="<?php echo $list['id']; ?>" class="hidden"></td></tr>
                 <tr><th>文章名称：</th></tr>
                 <tr><td><input name="title" value="<?php echo $list['newsTitle']; ?>" class="txt" style="width:400px;" type="text"></td></tr>
                 <tr><th>文章内容：</th></tr>
