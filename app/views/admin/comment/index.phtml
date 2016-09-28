@@ -28,7 +28,7 @@
                 <?php if (is_array($news)): ?>
                 <?php foreach ($news as $list): ?>
                 <li class="list-group-item">
-                    <input name="deleteid" value="<?=$list['id'];?>" class="checkbox" type="checkbox">
+                   <input name="deleteid" value="<?=$list['id'];?>" class="checkbox" type="checkbox" >
                     <strong>   新闻标题： <?php echo mb_substr($list['newsTitle'], 0, 20); ?></strong>&nbsp;&nbsp;&nbsp;<?php echo date('Y-m-d H:i:s', $list['newsTime']); ?>
                     <br>
                     新闻内容： <?php echo mb_substr($list['newsContent'], 0, 50); ?>
