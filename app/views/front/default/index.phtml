@@ -1,27 +1,30 @@
 
 <html>
 <head>
+    <?php $this->partial("common/top");?>
+    <link type="text/css" rel="stylesheet" href="/dist/css/bootstrap.css" />
     <title>最新新闻</title>
 </head>
-<body><div class="content">
-    <div class="lefter">
-        <div class="title">
-            <h2 class="cBlue fB">最新新闻<b class="cGrey fn">Information</b></h2>
-        </div>
-        <ul class="list_r" style="padding-right:40px">
-            <link type="text/css" rel="stylesheet" href="/front/css/style.css" />
+<body>
+<div class="container">
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+        最新新闻
+    </a>
+    <?php if (is_array($news)): ?>
+    <?php foreach ($news as $list): ?>
+        <li><a href="newslist?id=<?php echo $list['id']; ?>" class="list-group-item"><?php echo mb_substr($list['newsTitle'], 0, 20); ?>
+                <?php echo date('Y-m-d H:i:s', $list['newsTime']); ?></a></li>
+    <?php endforeach;?>
+    <?php endif;?>
 
-            <?php if (is_array($news)): ?>
-                <?php foreach ($news as $list): ?>
-                    <li><a href="newslist?id=<?php echo $list['id']; ?>"><?php echo mb_substr($list['title'], 0, 20); ?> </a><span class="time2"><?php echo date('Y-m-d H:i:s', $list['time']); ?></span></li>
-                <?php endforeach;?>
-            <?php endif;?>
-
-        </ul>
-        <div class="blank10"></div>
-        <div class="pages"> <?php echo $page; ?></div>
-
-        </div>
+</div>
+<nav>
+    <ul class="pagination">
+        <?php echo $page; ?>
+    </ul>
+</nav>
+    </div>
 </body>
 </html>
 

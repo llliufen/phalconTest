@@ -1,40 +1,60 @@
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>新闻详情</title>
+    <?php $this->partial("common/top");?>
+    <link type="text/css" rel="stylesheet" href="/dist/css/bootstrap.css" />
+    <title >新闻详情</title>
     </head>
 <body>
-
-<div class="lefter">
-    <div class="title">
-        <h2 class="cBlue fB">详细信息<b class="cGrey fn">News</b></h2>
-
-    </div>
-    <div class="article">
+<div class="container">
+    <ul class="list-group">
         <?php if (is_array($news)): ?>
         <?php foreach ($news as $row): ?>
-        <h3><?php echo $row['title']; ?></h3>
-        <h4>发布时间：<?php echo date("Y-m-d H:i:s", $row['time']); ?></h4>
-<?php echo $row['content']; ?>
+        <li class="list-group-item" ><h2><strong><div class="text" style="text-align: center"><?php echo $row['newsTitle']; ?></div></strong></h2></li>
+        <li class="list-group-item"><h5><div class="text" style="text-align: center">发布时间：<?php echo date("Y-m-d H:i:s", $row['newsTime']); ?></div></h5></li>
+        <li class="list-group-item"><p><?php echo $row['newsContent']; ?></p></li>
+    </ul>
 
     </div>
-</div>
-</br>
-</br>
-</br>
-评论：
-</br>
-</br>
-    评论标题：
-<form  action="newslist" method="post">
-    <input name="title"  class="txt" type="text">
-    </br>
-</br>
-    评论内容：
-</br>
-   <textarea name="content" style="width:400px; height:150px"  ></textarea>
-<input name="submit" value="评论" type="submit">
+<div class="container">
+    <div class="list-group">
+<li class="list-group-item active">
+         <h3> 评论区：</h3>
+</li>
+<?php if (is_array($comment)): ?>
+        <?php foreach ($comment as $list): ?>
+
+
+   <li class="list-group-item">
+    <strong>评论标题：</strong><?php echo $list['commentTitle']; ?>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo date("Y-m-d H:i:s", $list['commentTime']); ?>
+       </li>
+        <li class="list-group-item">
+       评论内容：<?php echo $list['commentContent']; ?>
+   </li>
+    <?php endforeach;?>
+    <?php endif;?>
+        <nav>
+            <ul class="pagination">
+                <?php echo $page; ?>
+            </ul>
+        </nav>
+
+<form  action="commentadd" method="post">
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon" >评论标题：</span>
+        <input type="text" class="form-control" name="title">
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon">评论内容：</span>
+        <input type="text" class="form-control"  name="content">
+        <input type="hidden" class="form-control"  name="id" value="<?php echo $row['id']; ?>">
+    </div>
+    <br>
+    <input style="right: auto" name="submit" value="评论" type="submit">
     <?php endforeach;?>
     <?php endif;?>
     </form>
+</div>
     </body>
     </html>

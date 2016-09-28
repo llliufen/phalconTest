@@ -145,7 +145,7 @@ class Medoo
     }
 
     public function query($query)
-    {
+    { //echo $query;die;
         if ($this->debug_mode) {
             echo $query;
 

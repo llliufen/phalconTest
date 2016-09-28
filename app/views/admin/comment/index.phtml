@@ -1,0 +1,68 @@
+
+<html>
+<head>
+    <?php $this->partial("common/top");?>
+    <link type="text/css" rel="stylesheet" href="/dist/css/bootstrap.css" />
+    <title>最新评论</title>
+</head>
+<body>
+<div class="container">
+    <div class="list-group">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="/admin/default/index">最新新闻</a></li>
+            <li role="presentation"><a href="/admin/comment/index">最新评论</a></li>
+        </ul>
+        <form action="index" method="post">
+            <label for="orderId">评论标题：</label>
+            <input style="width:200px;" name="newstitle" id="orderId" type="text">
+            <input name="submit" type="submit" class="btn btn-default btn-middle verti-middle-btn" value="搜索">
+        </form>
+        <form action="/admin/comment/commentdelete" method="post">
+
+                <!-----------------------循环读取最新公告信息------------------------>
+                <?php if (is_array($comment)): ?>
+                    <?php foreach ($comment as $list): ?>
+            <div class="list-group">
+
+                <!-----------------------循环读取最新公告信息------------------------>
+                <?php if (is_array($news)): ?>
+                <?php foreach ($news as $list): ?>
+                <li class="list-group-item">
+                    <input name="deleteid" value="<?=$list['id'];?>" class="checkbox" type="checkbox">
+                    <strong>   新闻标题： <?php echo mb_substr($list['newsTitle'], 0, 20); ?></strong>&nbsp;&nbsp;&nbsp;<?php echo date('Y-m-d H:i:s', $list['newsTime']); ?>
+                    <br>
+                    新闻内容： <?php echo mb_substr($list['newsContent'], 0, 50); ?>
+                    <div class="text" style="text-align: right"> <a href="/admin/default/newsedit?id=<?=$list['id'];?>">编辑</a>
+
+
+                        <!-----------------------循环读取最新评论信息------------------------>
+
+                        <?php endforeach;?>
+                        <?php endif;?>
+
+                    </div>
+                           <li class="list-group-item"><input name="deleteid" value="<?=$list['id'];?>" class="checkbox" type="checkbox">
+                            <strong>评论标题：<?php echo mb_substr($list['commentTitle'], 0, 20); ?></strong> &nbsp;&nbsp;&nbsp; <?php echo date('Y-m-d H:i:s', $list['commentTime']); ?>
+                        <br>评论内容： <?php echo mb_substr($list['commentContent'], 0, 50); ?>&nbsp;&nbsp;&nbsp;
+                        新闻ID： <?php echo $list['newsId']; ?>
+                   </li>
+
+                    <?php endforeach;?>
+                <?php endif;?>
+                <!-----------------------读取最新评论信息------------------------>
+                <br>
+                <td><input value="提 交" class="btn" type="submit" name="submit"></td>
+
+</form>
+    </div>
+
+    <nav style="float: right">
+        <ul class="pagination">
+            <?php echo $page; ?>
+        </ul>
+    </nav>
+</div>
+
+
+</body>
+</html>

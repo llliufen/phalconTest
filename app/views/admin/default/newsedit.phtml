@@ -1,4 +1,5 @@
 <head>
+    <?php $this->partial("common/top");?>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>添加新文章</title>
     <link rel="stylesheet" href="/admin/css/style.css" type="text/css" media="all">
@@ -15,9 +16,9 @@
                 <?php foreach ($news as $list): ?>
                         <tr><td><input name="id" value="<?php echo $list['id']; ?>" ></td></tr>
                 <tr><th>文章名称：</th></tr>
-                <tr><td><input name="title" value="<?php echo $list['title']; ?>" class="txt" style="width:400px;" type="text"></td></tr>
+                <tr><td><input name="title" value="<?php echo $list['newsTitle']; ?>" class="txt" style="width:400px;" type="text"></td></tr>
                 <tr><th>文章内容：</th></tr>
-                <tr><td><textarea name="content" style="width:400px; height:150px"  ><?php echo $list['content']; ?></textarea></td></tr>
+                <tr><td><textarea name="content" style="width:400px; height:150px"  ><?php echo $list['newsContent']; ?></textarea></td></tr>
 
                     <?php endforeach;?>
                 <?php endif;?>

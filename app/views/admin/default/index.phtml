@@ -1,55 +1,58 @@
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>最新公告</title>
-    <link rel="stylesheet" href="/admin/css/style.css" type="text/css" media="all">
 
+<html>
+<head>
+    <?php $this->partial("common/top");?>
+    <link type="text/css" rel="stylesheet" href="/dist/css/bootstrap.css" />
+    <title>最新新闻</title>
 </head>
 <body>
 <div class="container">
-    <h3 class="marginbot">最新公告 <a href="newsadd" class="sgbtn">添加新文章</a></h3>
-    <div class="mainbox">
-        <form action="index" method="get">
+    <div class="list-group">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="/admin/default/index">最新新闻</a></li>
+            <li role="presentation"><a href="/admin/comment/index">最新评论</a></li>
+        </ul>
+
+        <form action="index" method="post">
             <label for="orderId">新闻标题：</label>
             <input style="width:200px;" name="newstitle" id="orderId" type="text">
             <input name="submit" type="submit" class="btn btn-default btn-middle verti-middle-btn" value="搜索">
+            <div class="text" style="text-align: right"> <a href="newsadd" >添加新文章</a></div>
         </form>
         <form action="delete" method="post">
-            <table class="datalist fixwidth">
-                <tbody>
 
-                <tr>
-                    <th nowrap="nowrap"><input name="chkall" id="chkall" class="checkbox" type="checkbox"><label for="chkall">删除</label></th>
-                    <th nowrap="nowrap">文章名称</th>
-                    <th nowrap="nowrap">添加时间</th>
-                    <th nowrap="nowrap">详情</th>
-                </tr>
+            <div class="list-group">
+
                 <!-----------------------循环读取最新公告信息------------------------>
                 <?php if (is_array($news)): ?>
-                    <?php foreach ($news as $list): ?>
-                        <tr>
-                            <td width="150"><input name="deleteid" value="<?=$list['id'];?>" class="checkbox" type="checkbox"></td>
-                            <td><strong><?php echo mb_substr($list['title'], 0, 20); ?></strong></td>
-                            <td width="200"><?php echo date('Y-m-d H:i:s', $list['time']); ?></td>
-                            <td width="150"><a href="/admin/default/newsedit?id=<?=$list['id'];?>">编辑</a></td>
-                        </tr>
+                <?php foreach ($news as $list): ?>
+               <li class="list-group-item">
+                   <input name="deleteid" value="<?=$list['id'];?>" class="checkbox" type="checkbox">
+                        <strong>   新闻标题： <?php echo mb_substr($list['newsTitle'], 0, 20); ?></strong>&nbsp;&nbsp;&nbsp;<?php echo date('Y-m-d H:i:s', $list['newsTime']); ?>
+                   <br>
+                  新闻内容： <?php echo mb_substr($list['newsContent'], 0, 50); ?>
+                       <div class="text" style="text-align: right"> <a href="/admin/default/newsedit?id=<?=$list['id'];?>">编辑</a>
+
+
+                <!-----------------------循环读取最新公告信息------------------------>
+
                     <?php endforeach;?>
                 <?php endif;?>
-                <!-----------------------读取最新公告信息------------------------>
 
-                <tr class="nobg">
-                    <td><input value="提 交" class="btn" type="submit" name="submit"></td>
-                    <td class="tdpage" colspan="4">
-                        <div class="pages"><?php echo $page; ?>
-
-                          </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="margintop"></div>
-
-    </div>
 </div>
+            <td><input value="提 交" class="btn" type="submit" name="submit"></td>
+           </form>
+
+
+
+    <nav style="float: right">
+        <ul class="pagination">
+            <?php echo $page; ?>
+        </ul>
+    </nav>
+</div>
+
+
 </body>
 </html>
