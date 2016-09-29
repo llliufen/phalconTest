@@ -17,5 +17,6 @@
 
 ###项目需求功能已全部完成
 #####front/default/index是前台首页新闻列表，点击进入newslist新闻详情界面，front/common/top为前台导航栏；
-#####admin/default/index是后台新闻列表，点击添加新闻进入newsadd添加新闻，点击编辑进入newsedit编辑新闻；
+#####admin/default/index是后台新闻列表，点击新闻标题进入对应的的评论界面，点击添加新闻进入newsadd添加新闻，点击编辑进入newsedit编辑新闻；
 #####admin/comment/index是后台评论列表，admin/common/top为后台导航栏
+#####新闻是逻辑删除，评论是物理删除

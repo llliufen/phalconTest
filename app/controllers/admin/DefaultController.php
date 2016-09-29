@@ -133,10 +133,6 @@ class DefaultController extends BaseController
         $id      = $request->getPost('deleteid');
         $where   = ['id' => $id];
         $comment->delete($where);
-        $this->dispatcher->forward([
-            'controller' => 'default',
-            'action'     => 'newslist',
-        ]);
+        return $this->response->redirect('/admin/default/newslist');
     }
-
 }
