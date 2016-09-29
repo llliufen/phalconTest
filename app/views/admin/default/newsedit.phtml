@@ -2,28 +2,51 @@
     <?php $this->partial("common/top");?>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>添加新文章</title>
-    <link rel="stylesheet" href="/admin/css/style.css" type="text/css" media="all">
+    <!--前后顺序一定不能颠倒-->
+    <script type="text/javascript"src="/utf8-php/ueditor.config.js"></script>
+    <script type="text/javascript"src="/utf8-php/ueditor.all.min.js"></script>
+    <script type="text/javascript"src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body>
 <div class="container">
-    <h3 class="marginbot">添加新文章<a href="index" class="sgbtn">返回文章列表</a></h3>
+    <div class="list-group">
+        <li class="list-group-item active">
+            <h2> 编辑文章：</h2>
+
+        </li><br>
+        <a href="index" >返回文章列表</a><br>
     <div class="mainbox">
         <!----------------------------添加新文章----------------------->
         <form action="/admin/default/newsedit" method="post">
             <table class="opt" style="width:600px;">
                 <tbody>
+
                 <?php if (is_array($news)): ?>
                 <?php foreach ($news as $list): ?>
                         <tr><td><input name="id" value="<?php echo $list['id']; ?>" class="hidden"></td></tr>
-                <tr><th>文章名称：</th></tr>
-                <tr><td><input name="title" value="<?php echo $list['newsTitle']; ?>" class="txt" style="width:400px;" type="text"></td></tr>
-                <tr><th>文章内容：</th></tr>
-                <tr><td><textarea name="content" style="width:400px; height:150px"  ><?php echo $list['newsContent']; ?></textarea></td></tr>
+                        <div class="input-group">
+                            <span class="input-group-addon">文章名称：</span>
+                            <input type="text" class="form-control"  name="title" value="<?php echo $list['newsTitle']; ?>">
+                            <input type="hidden" class="form-control"  name="id" value="<?php echo $list['id']; ?>">
+                        </div><br>
 
+                <div class="input-group">
+                    <span>文章内容：</span>
+                        <!-- 编辑器的使用  -->
+                        <script id="container" name="content" type="text/plain">
+                            <?php echo $list['newsContent']; ?>
+                        </script>
+                        <script type="text/javascript">
+                            var ue = UE.getEditor('container');
+                        </script>
+</div>
                     <?php endforeach;?>
                 <?php endif;?>
                 </tbody>
+                <br>
+                <input type="radio" name="newsstatus" value="0"> 激活
             </table>
+            <br>
             <div class="opt"><input name="sub" value=" 提 交 " class="btn" tabindex="3" type="submit"></div>
         </form>
         <!----------------------------添加新文章----------------------->

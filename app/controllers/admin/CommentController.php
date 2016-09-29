@@ -20,15 +20,16 @@ class CommentController extends BaseController
             $comment   = $data->select('*', ['commentTitle[~]' => $newstitle]);
             $this->view->setVar('comment', $comment);
         } else {
-            $data    = new Comment();
-            $comment = $data->select("*");
-            $this->view->setVar('comment', $comment);
+            $data           = new Comment();
             $currentPage    = $this->request->get('page', 'int', 1); //当前页
             $pageSize       = 10; //每页个数
             $offset         = $pageSize * ($currentPage - 1); //偏移量
             $where["LIMIT"] = [$offset, $pageSize];
+            $where['ORDER'] = ['commentTime' => 'DESC'];
             $count          = $data->count(); //查询总数
             $page           = new Paginator($count, $pageSize); //新建分页对象
+            $comment        = $data->select("*", $where);
+            $this->view->setVar('comment', $comment);
             $this->view->setVar('page', $page->showpage()); //分页显示的内容
         }
     }

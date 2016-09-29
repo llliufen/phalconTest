@@ -13,8 +13,10 @@
     </a>
     <?php if (is_array($news)): ?>
     <?php foreach ($news as $list): ?>
+            <?php if ($list['newsStatus'] == '0'): ?>
         <li><a href="newslist?id=<?php echo $list['id']; ?>" class="list-group-item"><?php echo mb_substr($list['newsTitle'], 0, 20); ?>
                 <?php echo date('Y-m-d H:i:s', $list['newsTime']); ?></a></li>
+                <?php endif;?>
     <?php endforeach;?>
     <?php endif;?>
 
